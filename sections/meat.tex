@@ -1,0 +1,159 @@
+\section{Meat of the proof}
+
+\subsection{Overview}
+
+Our goal is to show that \( \varphi^{(1)}_{V_d} \) attains its maximum in the interior of \( \Omega \), that is, \( \max_{x \in \Omega} |\varphi^{(1)}_{V_d}(x)| - \max_{x \in \partial\Omega} |\varphi^{(1)}_{V_d}(x)| > 0 \). Instead of directly finding \( \varphi^{(1)}_{V_d} \), we show that there is an approximation \( \tilde \varphi^{(1)}_{V_d} \) such that
+\begin{align*}
+    \text{A : } &\|\tilde\varphi^{(1)}_{V_d} - \varphi^{(1)}_{V_d}\|_{L^\infty(\mu_d)} < \delta/2 \\
+    \text{B : } &\max_{x \in \Omega} |\tilde{\varphi}(x)| - \max_{x \in \partial\Omega} |\tilde{\varphi}(x)| > \delta,
+\end{align*}
+for some \( \delta > 0\) since then we have that
+\[
+    \max_{x \in \Omega} |\varphi^{(1)}_{V_d}(x)| - \max_{x \in \partial\Omega} |\varphi^{(1)}_{V_d}(x)|
+    \geq \max_{x \in \Omega} |\tilde\varphi^{(1)}_{V_d}(x)| - \delta/2 - \max_{x \in \partial\Omega} |\tilde\varphi^{(1)}_{V_d}(x)| - \delta/2
+    > 0.
+\]
+
+Our candidate for \( \tilde\varphi^{(1)}_{V_d} \) is \( e^{\lambda t} P_t f_0 \) for some \( f_0 \)
+
+
+
+\remark{I the the stuff below should be reabsorbed (it mostly already is) into what I called section 2?}
+\subsection{A new}
+
+$t_{yau}$ is the time that we need to make li-yau work with dimension free constants, which is roughly 1.
+
+\begin{enumerate}
+    \item Our candidate is $f := \tilde P_{C/d}\tilde P_{t_{yau}} f_0$, where $\tilde P_t := e^{\lambda t}P_t$.
+    \item By Li-Yau and the fact that $P_t$ is an $L^2$ contraction onto \( \varphi^{(1)} \), we know that \[ \|\tilde P_{t_{yau}+C/d} f_0- \varphi^{(1)}\|_\infty \le C_{yau} \|\tilde P_{C/d} f_0- \varphi^{(1)}\|_2 
+    \le  C_{yau} e^{\lambda C/d} \| f_0 - \varphi^{(1)}\|_2 \]
+    \item By the stable Poincare trick which works like $d^{-1/2}$-well we then have that
+    $$
+    \|f_0 - \varphi^{(1)}\|_2  \le \frac{\varepsilon}{\lambda^{(2)}-\lambda^{(1)}}
+    $$
+    with \( \varepsilon \sim d^{-1/2} \) (claim).
+\end{enumerate}
+
+\begin{equation}
+    \|f-\varphi^{(1)}\|_\infty \le C_{yau} e^{\lambda C/d} \frac{\varepsilon}{\lambda^{(2)}-\lambda^{(1)}}
+\end{equation}
+
+\subsubsection{The constant}
+
+Goal: \( C_{yau} \).
+
+Let \( t_{yau} = t_1 + t_2 \), then \( C_{yau} = e^{\lambda t_{yau}}C_1C_2 \) where
+\begin{align*}
+    C_1 &\approx e^{2/t_1} (2\pi t_1)^{-1/2} \\
+    C_2 &\approx \exp(\frac{5}{2t_1})\frac{t_1}{t_1 - t_2}
+\end{align*}
+for \( d \) large enough such that \( \Phi_{t_2 d} \) hits the line. With \( t_1 = 1.5, t_2 = 0.5 \) we obtain
+\begin{align*}
+    C_1 &\approx 1.25 \\
+    C_2 &\approx 8
+\end{align*}
+together with \( \lambda \approx 2.5 \) \todo{But isn't $\lambda\approx 1$?? Also, you want to pick $t_2$ like $1/d$, and $t_1$ to minimize $t^{}$}this yields \( C_{yau} \approx 1500 \) which we can beat with \( d^{-1/2} \).
+
+In a mathematica file i have better numbers \( C_{yau} \approx 800 \), but i still think \( d \) will be big.
+
+
+
+
+
+
+
+ 
+\subsection{B new}
+\begin{enumerate}
+    \item  The $L^2$ norm of $\tilde P_{C/d}\tilde P_{t_{yau}} f_0$ is roughly $1$ (with respect to a probability measure). In particular, it is $\ge 1$ somewhere. Norm 1 follows from part A: \( |\|f\| - \|\varphi\|| \le \|f-\varphi\| < \frac{\varepsilon}{\lambda^{(2)}-\lambda^{(1)}} \) implies \( \|f\| \ge 1 - \frac{\varepsilon}{\lambda^{(2)}-\lambda^{(1)}} \), therefore \( f \) is at least \( 1 - \frac{\varepsilon}{\lambda^{(2)}-\lambda^{(1)}} \) somewhere.
+    \item It suffices to show that it is small at the boundary.
+    \item By the Liptschitz stability, the function $\tilde P_{t_{yau}} f_0$ is at most $e^{\lambda t_{yau}
+    }$-lipschitz. In particular, if $g:=\tilde P_{t_{yau}} f_0$ we have the estimate
+    $$
+    |(P_{C/d} g)(x_0,y_0)| 
+    \le |g(\Phi_C(x_0,y_0))|+e^{\lambda t_{yau}}2(C/d)^{1/2}
+    \le e^{\lambda t_{yau}}(|\Phi_C(x_0,y_0)_x|+2(C/d)^{1/2})
+    $$
+    where the first estimate is the Gaussian estimate from the heat flow, and the second estimate is from the Liptschitz constant + the fact that we are zero at $x=0$ (antisymmetry). Let me explain the second step: \( f_0 \) is 1-Lipschitz, therefore \( g \) is \( e^{\lambda t_{yau}} \)-Lipschitz. The Lipschitz condition at \( (0, y_0) \) gives us \( |g(\Phi_C(x_0,y_0)) - g(\Phi_C(0,y_0))| \le  e^{\lambda t_{yau}}|\Phi_C(x_0,y_0) - \Phi_C(0,y_0)| \). Since \( f_0 \) is antisymmetric, \( g(\Phi_C(0,y_0)) = 0 \), hence \( |g(\Phi_C(x_0,y_0))| \le  e^{\lambda t_{yau}}|\Phi_C(x_0,y_0) - \Phi_C(0,y_0)| \). Since both flows land on the critical line, only their \( x \)-components matter. The flow line \( \Phi_C(0,y_0) \) ends up at \( (0, 2) \), therefore \( |\Phi_C(x_0,y_0) - \Phi_C(0,y_0)| = |\Phi_C(x_0,y_0)_x| \)
+    \item If we flow for long enough time ($C$ big) the first term is $<1/10$, and if $d$ is big, the second term is small.
+\end{enumerate}
+
+\begin{equation*}
+    \max_{x \in \Omega} |f(x)| - \max_{x \in \partial\Omega} |f(x)|
+    \ge 1 -\frac{\varepsilon}{\lambda^{(2)}-\lambda^{(1)}} - e^{\lambda t_{yau}}(|\Phi_C(x_0,y_0)_x|+2(C/d)^{1/2})
+\end{equation*}
+
+% \subsection{A}
+
+% We use ultracontractivity of \( P_t \) to reduce the problem of estimating the \( L^\infty \)-norm of \( e^{\lambda t} P_t f - \varphi^{(1)}_{V_d} \) to esimating its \( L^2 \)-norm.
+% \begin{equation*}
+%     \|e^{\lambda t} P_t f - \varphi \|_{L^\infty}
+%     = \|e^{\lambda t} P_t f - e^{\lambda t} P_t \varphi \|_{L^\infty}
+%     = e^{\lambda t} \|P_t(f-\varphi)\|_{L^\infty}
+%     \le e^{\lambda t} C \|f-\varphi\|_{L^2}.
+% \end{equation*}
+
+% To apply stable Poincaré, we decompose \( f = f_{\parallel} + f_{\perp} \) into components \( f_{\parallel} \in \{\varphi^{(1)}_{V_d}\} \) and \( f_\perp \in \{\varphi^{(1)}_{V_d}\}^\perp \). We can assume that \( f \) is scaled so that \( f_\parallel = \varphi^{(1)}_{V_d} \), hence
+% \[
+%     \|f - \varphi^{(1)}_{V_d}\| \le \|f_\parallel - \varphi^{(1)}_{V_d}\|+ \|f_\perp\| = \|f_\perp\|.
+% \]
+% If we show that \( \inner{f}{\mathcal L_{V_d} f} \le (\lambda_{V_d}^{(1)} + \varepsilon)\|f\|^2 \), then using stable Poincaré we get that
+% \[
+%     \|e^{\lambda t} P_t f - e^{\lambda t} P_t \varphi \|_{L^\infty} \le e^{\lambda t} C \sqrt{\frac{\varepsilon}{\lambda_{V_d}^{(2)} - \lambda_{V_d}^{(1)}}} \|f\|_{L^2}
+% \]
+
+% \subsection{B}
+
+% Show that
+
+% \[
+%     \max_{x \in \Omega} |P_tf(x)| - \max_{x \in \partial\Omega} |P_tf(x)| > e^{-\lambda t} \delta.
+% \]
+
+% We discuss how to upper bound \( P_t f(x) = \E[f(X_t)] \) in section~\ref{sec:flow}. 
+
+% \begin{align*}
+%     \max_{x \in \Omega} |P_tf(x)| - \max_{x \in \partial\Omega} |P_tf(x)|
+%     &\ge \max_{x \in [-1,1] \times \{2\}} |P_tf(x)| - \max_{x \in \partial\Omega} |P_tf(x)| \\
+%     &= \max_{x \in [-1,1] \times \{2\}} \E[f(X_t)|X_0=x] - \max_{x \in \partial\Omega} |\E[f(X_t)|X_0=x]| \\
+%     &\ge \max_{x \in [-1,1] \times \{2\}} f(h_t(x)) - C\sqrt{2t} - \max_{x \in \partial\Omega} |f(h_t(x)) + C \sqrt{2t}| \\
+%     &\ge \max_{x \in [-1,1] \times \{2\}} f(x) - C\sqrt{2t} - \max_{x \in h_t(\partial\Omega)} |f(x) + C \sqrt{2t}| \\
+%     &\ge 1 - (f(x^*) + 2C \sqrt{2t})
+% \end{align*}
+% which is greater than \( e^{-\lambda t}\delta \) if and only if \( f(x^*) + 2C\sqrt{2t} < 1-\delta e^{-\lambda t} \).
+
+
+
+
+\section{A careful computation of the Li-Yau constant.}
+
+
+\remark{That's a rant for myself (jaume) but use it if it is useful}
+
+I will assume that we have managed to prove that
+
+\begin{proposition}
+    
+There exists a $t_0<64$ such that the flow by $t_0$ gets you at most $d_0<10$ far away from the center of the line.
+
+\end{proposition}
+
+then from here we see that
+$C_1(\tau_1)^{-1} \ge \sqrt{2\pi} \tau_1^{1/2}+O(\tau).$
+Eye-balling things, as long as $\tau>5$ I should have 
+$C_1(\tau_1)^{-1} \ge \tau_1^{1/2}$.
+which should be a good approximation as long as $\tau>10$.
+
+We know that the $r-$axis ODE has to get to distance $\sim 8$ from the origin, and this takes us time $\sim 64/d$, and as soon as $d>64$ and $\tau>10$ should give us a negligible contribution (let's say a factor of 2 to be generous)
+
+The total time of flight will be essentially $\tau_1$. Then for $d>10$ the total loss should be like
+
+$2 \tau_1^{-1/2}e^{\tau_1 x_0+\tau_2} \le 2^{3/2} e x_0^{1/2} (2\tau_1x_0e^{-2 \tau_1 x_0})^{-1/2}$.
+
+Optimizing over $\tau_1$ amounts to finding the largest value of $xe^{-x}$, which is $1/e$ taken at $\tau = \frac{1}{2 x_0}$. In other words, we get that the Li-Yau constant will be like $(2e)^{3/2} x_0^{1/2}$ and setting $x_0=10$, we get a li-yau constant of $40$ (but more like $14\cdot e^{64/d}$ in case $d$ gets big and it's useful)
+
+Now the constant $C_{SP}$ will be like 
+
+\subsection{A much better eigenfunction estimate than cosine}
+
+If we were able to give a good Lip constant to the eigenfunction itself we would be a lot more efficient. 

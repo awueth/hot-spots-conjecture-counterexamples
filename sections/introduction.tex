@@ -1,0 +1,369 @@
+\section{Introduction}
+
+Let $\Omega$ be a bounded, connected, regular enough domain in $\mathbb R^d$. Let $u(x,t)$ be the solution in $\Omega$ of the heat equation in $\Omega$ with insulating boundary conditions (Neumann) and initial temperature $u(x,0)=u_0(x)$. That is,
+
+\begin{equation}
+    \begin{cases}
+        \partial_t u(x,t) = \Delta u(x,t) & \text{ for } (x,t)\in \Omega^\circ\times \mathbb R_{>0}\\
+        \partial_n u(x,t) = 0 &\text{ for } (x,t)\in \partial \Omega \times \mathbb R_{>0} \\
+        u(x,0) = u_0
+    \end{cases}
+\end{equation}
+
+Under mild regularity conditions in $\Omega$, the temperature $u(x,t)$ of the domain converges uniformly to the average temperature of the domain as $t$ goes to infinity. In other words, the functions $u_t:= u(t,\cdot)$ converge, as $t\to \infty$, to the constant function with value $\overline u:= \frac 1 {|\Omega|}\int_\Omega u_0(x) dx$ in the in $L^\infty(\Omega)$ sense.
+
+Rauch's Hot Spots conjecture aims to understand the largest fluctuations of $u_t$, namely, the points where $u_t$ attains its maximum and minimum. It asserts that the global maxima and minima of $u_t$ (the hottest and coldest points in $\Omega$ for large times) approach the boundary of $\Omega$.  In order to understand this asymptotic behavior of $u_t$ for large times, one can use the method of separation of variables. 
+
+The Neumann-Laplace operator $-\Delta$ in $\Omega$ is a self-adjoint operator with discrete eigenvalues $0= \lambda_0<\lambda_1 \le\lambda_2\le \lambda_3 \dots$ with an associated orthonormal eigenbasis $\phi_0, \dots, \phi_k\dots$ satisfying 
+\begin{equation}
+    \begin{cases}
+        -\Delta \phi_i = \lambda_i \phi_i \text{ in } \Omega^\circ \\
+        \partial_n \phi_i = 0 \text{ in }\partial \Omega
+    \end{cases},
+\end{equation}
+with $\phi_0\equiv \frac{1}{|\Omega|^{1/2}}$ a constant function. The method of separation of variables then gives us a solution to the heat equation $$u_t(x) = \sum_{k \ge 0} \inner{u_0}{\phi_k}\phi_k e^{-\lambda_k t}.$$
+
+
+This shows, in particular, that the heat distribution converges to the mean \( \int_\Omega u_0 \) as \( t \to \infty \), at least in the $L^2(\Omega)$ sense. The convergence in $L^\infty(\Omega)$ follows once one shows, under mild regularity conditions on $\Omega$, that the functions $u_t(x)$ are Hölder-continuous. 
+
+Let $k_0>0$ be the first non-zero index $k$ such that $\langle u_0, \phi_k\rangle \neq 0$, and assume, for simplicity, that $\lambda_{k_0+1}>\lambda_{k_0}$.The function $\tilde u_t(x,t) := e^{\lambda_{k_0} t}(u(x,t)-\bar u)$ has maxima and minima in the same locations as $u_t$, and
+$$
+\tilde u_t = 
+\langle u_0, \phi_{k_0}\rangle \phi_{k_0}
++
+\sum_{n\ge 1}e^{-(\lambda_{k_0+n}-\lambda_{k_0})t}
+\langle u_0, \phi_{k_0+n}\rangle \phi_{k_0+n}.
+$$
+As $t\to \infty$, the functions $\tilde u_t$ must then converge exponentially fast to the function $\langle u_0, \phi_{k_0}\rangle \phi_{k_0}$, and in particular, 
+
+\begin{lemma}
+    Under sufficient regularity for $\Omega$, the functions $\tilde u_t$ converge uniformly to a nonzero multiple of $\phi_{k_0}$. In particular, the extremal points of $\tilde u_t$ and of $u_t$ converge subsequentially to extremal points of $\phi_{k_0}$.
+\end{lemma}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.2\textwidth]{figures/Archive 2/static_ball_1.png}
+  \includegraphics[width=0.2\textwidth]{figures/Archive 2/static_ball_2.png}
+  \includegraphics[width=0.2\textwidth]{figures/Archive 2/static_ball_3.png}
+  \includegraphics[width=0.2\textwidth]{figures/Archive 2/static_ball_4.png}
+  \caption{From left to right: The first four Laplacian eigenfunctions $\phi_1,\phi_2,\phi_3,\phi_4$ on a Disk.}
+  \label{fig:modes}
+\end{figure}
+
+It is relatively straightforward to find examples of initial conditions for which not all extrema converge to the boundary. Consider the first four Neumann eigenfunctions of the Laplacian on a disk, as illustrated in \Cref{fig:modes}. By selecting $u_0$ such that $\inner{u_0}{\phi_1} = \inner{u_0}{\phi_2} = \inner{u_0}{\phi_3} = 0$ and $\inner{u_0}{\phi_4} = 1$, the extremal points of $\tilde u_t$ converge to the extremal points of $\phi_4$, which do not entirely lie on the boundary. However, this straightforward counterexample can be dismissed by setting constraints on the initial condition; for \emph{generic} initial conditions $u_0$, all coefficients $\langle u_0, \phi_k\rangle$ are nonzero, and $k_0 = 1$. This leads to the Hot Spots conjecture, as commonly referenced in the literature:
+
+\begin{conjecture}[\cite{rauch_lecture_1975}]
+    For \emph{nice enough} bounded domains $\Omega\subset \mathbb R^d$, the global extrema of $\phi_1$ are attained in $\partial \Omega$.
+\end{conjecture}
+ 
+The definition of \emph{nice} is deliberately vague at this point, and it remains a challenge to find natural classes of domains for which the conjecture is true. A significant challenge of the conjecture is that Laplace eigenfunctions can only be explicitly computed for very limited domains, like balls, triangles, and squares. For more interesting classes of domains, identifying where the first eigenfunction reaches its maximum remains open. Potential classes of \emph{nice} domains that have been considered include domains with a smooth boundary (disproven by a counterexample with a planar domain with two holes \cite{burdzy_counterexample_1999}), simply connected domains in $\mathbb R^2$ (currently open), and convex domains in $\mathbb R^d$ (disproven in high enough dimensions \cite{pont_convex_2024}).
+
+This work focuses on understanding this late scenario. While the argument in \cite{pont_convex_2024} can technically be made effective, the dimensions one would obtain by a naive tracking of the constants would be extremely large\footnote{A naive implementation of \cite{pont_convex_2024} would provide a bound $e^{e^{C}}$ for some constant $C$ that could in principle be optimized, but most likely not below $~20$. This would give, in the most optimistic case, $d_0\ge 10^{10^4}$.} The goal of this work is to improve on these types of estimates.
+
+\paragraph{What happens when there are multiple ground eigenfunctions?}
+
+The eigenspace of the eigenvalue $\lambda_1$ is not necessarily one-dimensional. This is the case, for example, for both the square and the ball. In this case, one could make multiple versions of the Hot Spots conjecture, namely whether it holds \emph{for any}, or \emph{for some} eigenfunction in the first eigenspace. More precisely, Bañuelos-Burdzy \cite{banuelos_hot_1999} introduced three small variations of the Hot Spots conjecture, namely
+\begin{enumerate}
+    \item[(HS1)] For every eigenfunction $\varphi_{1}(x)$ corresponding to $\lambda_1$ which is not identically $0$, and all $y \in D$, we have 
+\[
+\inf_{x \in \partial D} \varphi_{1}(x) < \varphi_{1}(y) < \sup_{x \in \partial D} \varphi_{1}(x).
+\]
+
+\item[(HS2)] For every eigenfunction $\varphi_{1}(x)$ corresponding to $\lambda_1$ and all $y \in D$, we have 
+\[
+\inf_{x \in \partial D} \varphi_{1}(x) \leq \varphi_{1}(y) \leq \sup_{x \in \partial D} \varphi_{1}(x).
+\]
+
+\item[(HS3)] There exists an eigenfunction $\varphi_{1}(x)$ corresponding to $\lambda_1$ which is not identically $0$, and such that for all $y \in D$, we have 
+\[
+\inf_{x \in \partial D} \varphi_{1}(x) \leq \varphi_{1}(y) \leq \sup_{x \in \partial D} \varphi_{2}(x).
+\]
+\end{enumerate}
+
+All constructions of this work will have a simple first eigenspace with a maximum on the interior. This will allow us to talk about \emph{the} first eigenfunction, and disprove the three versions at once.
+
+\subsection{The first Laplace eigenfunction and the Poincaré-Sobolev constant} \label{soincare_popolev}
+
+The main feature that separates the first Laplace eigenfunction from higher Laplace eigenfunctions is that it is the minimizing function of the Poincaré inequality.
+We define the Poincaré constant $C_p (\Omega)$ of a set $\Omega$ as the smallest constant such that the inequality
+$$
+\int_{\Omega}|f-\overline f|^2 dx \le C_p(\Omega) \int_{\Omega} |\nabla f|^2 dx.
+$$
+
+The essential point to note is that this constant is, in fact, equal to $1/\lambda_1(\Omega)$, and this equality is achieved only for the Neumann Laplace eigenfunctions associated with the eigenvalue $\lambda_1$. To observe this at a formal level (i.e., disregarding the theory of existence of minimizers that satisfy the Poincaré inequality, e.g. see \cite{evans_partial_1998}), one can analyze the critical points of the functional
+$$
+E(f):=\frac{\int_{\Omega} |\nabla f|^2 \, dx}{\int_{\Omega}|f-\overline f|^2 \, dx}.
+$$
+Critical points are points for which the first variation is zero, that is, points that satisfy
+$$
+\left.\frac{d}{dt}\right|_{t=0} E(f+tg) = 0
+$$
+for any $g\in C^{\infty}(\overline \Omega)$. The critical points of $E$ are exactly the Neumann eigenfunctions of the Laplacian. To see that, assume (without loss of generality by scaling invariance) that $\int_{\Omega} (f - \overline f)^2 dx =1$. In this case, one can compute
+$$
+\left. \frac{d}{dt} \right|_{t=0}E(f+t\varphi)
+=
+2\int_{\Omega} \nabla f \cdot \nabla \varphi dx
+-2 \lambda_f
+\int_{\Omega} (f-\overline f) \varphi dx,
+$$
+where $\lambda_{f}:= \int |\nabla f|^2 dx$. By setting the right-hand side to zero and integrating by parts, we obtain
+\begin{equation} \label{eq:poincare_int_by_parts}
+\lambda_f\int_{\Omega} (f-\overline f) \varphi dx
++ \int_\Omega (\Delta f) \varphi \dd{x} = \int_{\partial \Omega} (\nabla f \cdot n) \varphi \dd{x}.
+\end{equation}
+In particular, for all functions $g$ that vanish on $\partial \Omega$ we have
+$$
+\int_{\Omega} (\lambda_f(f-\overline f) + \Delta f) g \dd{x} = 0.
+$$
+By the fundamental lemma of variational calculus this shows that $\lambda_f(f-\overline f) + \Delta f = 0$, i.e. $f-\overline f$ is an eigenfunction of $-\Delta$ to the eigenvalue $\lambda_f$. Plugging this back into \Cref{eq:poincare_int_by_parts}, it follows immediately that for any function $h \in C^\infty(\overline{\Omega})$ we have
+$$
+\int_{\partial \Omega} (\nabla  f \cdot n) h \dd{x} = 0
+$$
+and therefore $\nabla f \cdot n = 0$. Notice how we obtained the Neumann boundary condition on $f$ without apriori assuming it.
+
+Restricting to functions with zero mean we obtain the well known Rayleigh quotient characterization of eigenvalues.
+
+\subsection{Weighted hot spots conjecture}
+
+A key step in disproving the Hot Spots conjecture for high-dimensional convex sets is finding counterexamples to a stronger (weighted) version of the conjecture. The weighted hot spots conjecture asserts that there exists a convex potential \( V \) defined on a convex domain \( \Omega \) such that the first Neumann eigenfunction of the operator \( \mathcal{L} := -\Delta + \nabla V \cdot \nabla \) attains its maximum on the boundary of \( \Omega \). The operator $L$, similarly to $-\Delta$, has a variational characterization.
+
+
+\subsubsection*{Variational interpretation of the weighted hot spots conjecture}
+
+In \Cref{soincare_popolev} we established that the Neumann eigenfunctions minimize the Rayleigh quotient over all zero mean functions. For the Neumann eigenfunctions of $-\Delta + \nabla V \cdot \nabla$ we have an analogous characterization, albeit with respect to a measure weighted by $e^{-V}$.
+
+\begin{proposition} \label{prop:var_char}
+The first non-trivial Neumann eigenvalue of the operator $\mathcal{L} = -\Delta + \nabla V \cdot \nabla$ is given by
+\[
+    \lambda^{(1)}_{\Omega, V} = \min_{\substack{f \in C^2(\Omega) \\ \int_\Omega f e^{-V} \dd{x} = 0}} \frac{\int_\Omega |\nabla f|^2 e^{-V} \dd{x}}{\int_\Omega |f|^2 e^{-V} \dd{x}},
+\]
+and this minimum is attained exactly by the eigenfunction $\phi_1$ corresponding to \( \lambda^{(1)}_{\Omega, V} \).
+\end{proposition}
+\begin{proof}
+The proof is analogous to the one for the Laplacian. The key equality, analogous to \Cref{eq:poincare_int_by_parts} is the following integration by parts:
+$$
+\int_{\Omega} \nabla \phi \nabla \psi e^{-V(x)} dx = \int_{\partial \Omega} \phi \nabla \psi \cdot n \, e^{-V(x)} dx + \int_{\Omega} \phi (-\Delta \psi + \nabla V \cdot \nabla \psi) e^{-V(x)} dx.
+$$
+The rest of the proof is verbatim.
+\end{proof}
+
+
+\subsubsection*{The $L$ as a Laplace operator on thin domains}
+
+
+This version of the hot spots conjecture can be viewed as a hot spots conjecture for thin plates with a cross-sectional volume of \( e^{-V} \). Suppose the domain $\Omega$ is of in the form of $P \times T$, where $T$ is very thin in all directions. On such a domain, any regular enough function is practically constant in the thin direction. The first Neumann eigenfunction achieves the minimum for $\inner{f}{\Delta f}_{L^2}$ over normalized functions. Observe that $\inner{f}{\Delta f}_{L^2} = -\int_{P \times T} |\nabla f|^2 \dd{x} \dd{y}$, but since $f$ is nearly constant in the thin direction, it follows that $|\nabla f|^2 \approx |\nabla_{P} f|^2 \dd{x}$. Consequently, integration over $T$ contributes a multiplicative factor of $e^{-V}$, thus $\inner{f}{\Delta f}_{L^2} \approx -\int_{P} |\nabla f|^2 e^{-V} \dd{x}$. Through integration by parts, the expression on the right becomes $\inner{f}{\mathcal{L} f}_{L^2(e^{-V})}$. We will show that the functions which minimize $\inner{f}{\mathcal{L} f}_{L^2(e^{-V})}$ are indeed Neumann eigenfunctions of the operator $\mathcal{L}$. This heuristic illustrates how the weighted hot spots conjecture aligns with the properties of the first Neumann eigenfunction for the operator $\mathcal{L}$, considering the measure is weighted by $e^{-V}$.
+
+The idea of using extra dimensions to simulate a new effective PDE is at the heart of the counterexample in \cite{pont_convex_2024}. A key step is to disprove the weighted version of the conjecture. In this work, we aim to find an effective upper bound on the dimension after which the weighted hot spots conjecture fails.
+
+\subsection{The main result}
+
+By constructing a family of convex potentials that depend on the dimension, we establish an explicit lower bound on the dimension for which the weighted hot spots conjecture is false. Our main result is as follows:
+
+\begin{theorem}
+There exists a convex potential $V$ on a convex domain $\Omega \subset \R^d$ for $d \ge \dimension$ such that the first Neumann eigenfunction $\phi$ attains its maximum in the interior of $\Omega$.
+\end{theorem}
+
+\subsubsection*{Acknowledgements}
+The author expresses his sincere gratitude to his supervisor, Dr. Jaume De Dios, for his invaluable guidance and support. The proof strategy originated from him, as did the figures in the Introduction. He also contributed the proof of \Cref{lem:coupling}. I am deeply grateful for his help editing and reviewing this work.
+
+\section{Strategy and outline of the proof}
+
+This section lays out the proof strategy and how the main estimates interact. The sequence of domains $\Omega_d$ will be of the form $[-M,M]\times B_R(\mathbb R^d)$ (for $M,R$ chosen later through the proof), with potentials that are radial in the second coordinate.
+
+Our aim is to reduce this $d+1$-dimensional problem to an effective two-dimensional setting, construct a tractable approximation to the first Neumann eigenfunction, and obtain pointwise estimates that contradict the hot spots property. The argument proceeds in five steps; precise statements and details appear in the subsections that follow.
+
+\begin{enumerate}
+    \item \textbf{Cylindrical Domains and Coordinates:} We exploit the radial symmetry of our chosen domains to show that the first Laplace eigenfunction of $(\Omega_d, V_d)$ must also be radial. This allows us to reduce the high dimensional problem to an effective two-dimensional problem on a rectangular domain with an effective potential of the form \( V_d(x,w)=(d-1)(V_0(x,|w|)-\log |w|) \). In this domain, the Neumann eigenfunction of \( -\Delta + \nabla V_d \cdot \nabla \) attains its maximum in the interior.
+
+    \item \textbf{$L^2$ convergence of the effective problem:} In the effective two-dimensional setting we $L^2$-normalize the first Neumann eigenfunctions $\phi_d$ with respect to the probability measures $\frac{1}{Z_d}e^{-V_d} dx$. This immediately shows that $\phi_d$ must achieve a value of at least $1$ at some point within the interior. Consequently, our objective shifts to showing that $\phi_d$ is less than $1$ on the boundary. We construct $V$ such that as $d \to \infty$, the measure $\frac{1}{Z_d}e^{-V_d}$ converges to the uniform measure on a one-dimensional line segment. Then we would expect that the eigenfunctions converge to the ones of the one-dimensional Laplacian on the said segment. The eigenfunction in one dimension serves as a guide to identify an auxiliary function $f_0$, which has the property that $\|\phi_d-f_0\|_{L^2(Z_d^{-1}e^{-V_d}dx)}$ converges to zero as $d \to +\infty$. 
+
+    \item \textbf{$L^\infty$ estimates via ultracontractivity:} An average ($L^2$) approximation is insufficient to control the maximum of the eigenfunction. We must upgrade our $L^2$ estimate to a pointwise ($L^\infty$) one. This is achieved by considering the function $\tilde \phi_d = e^{\lambda t} P_t f_0$ for some $t>0$, $f_0 \in L^2$ where $P_t$ is the semigroup associated with $-\Delta + \nabla V \cdot \nabla$. This construction allows us to invoke powerful estimates on semigroups, known as ultracontractivity estimates.
+    
+    \item \textbf{Boundary estimates through probabilistic interpretation:} We use a probabilistic interpretation of the semigroup $(P_t)_{t \ge 0}$, viewing it as the expectation of a function along the paths of a diffusion process. For large $d$, this diffusion is dominated by a deterministic drift, which corresponds to the gradient flow $\Phi_t$ of the potential. We show that for $d$ being sufficiently large, $\tilde \phi_d(x) \approx f_0(\Phi_t(x))$. Given that $V$ is convex, we have good control over the flow lines, thereby establishing that for any point $x$ on the boundary, $f_0(\Phi_t(x))$ is small.
+
+    \item \textbf{Synthesis of Estimates:} Finally, we combine the above results. The $L^2$ normalization implies the eigenfunction must be large somewhere in the domain. Our boundary estimates show that the approximating function $\tilde \phi$ is small on the boundary. Since our approximation error in $L^\infty$ scales as $d^{-1/4}$, we can pass the boundary estimate to the true eigenfunction for $d$ large enough.
+\end{enumerate}
+
+\subsection{Cylindrical Domains and Coordinates}
+
+
+\subsubsection*{The effective problem in cylindrical coordinates} 
+We will consider cylindrical domains of the form $[-100,100]\times B_{10}(\mathbb R^d)$ with a radial potential $V_d(x,y):= (d-1)V_0(x,|y|)$, and show that, under reasonable properties for $V_0$, for $d$ large enough the first Neumann Laplace eigenfunction will be radial. Indeed, we will show:
+
+\begin{restatable}{proposition}{propradial}
+    Let $\Omega:=[-M,M]\times B_{10}(\mathbb R^d)$, and $V: \Omega \to \mathbb R$ be a radial potential. Then if $\lambda^{1}_{\Omega,V}<\frac{d}{100}$, the first eigenfunction $\phi_{\Omega,V}$ is radial in the second coordinate.
+\end{restatable}
+    
+
+
+In our case, $R=10$, and $\lambda^{1}_{V_d} \le 1+10^{-14}$ for $d \ge 400$, see \Cref{prop:eig_upper_bound}. Once we know that the first eigenfunction is radial, it must be the minimizer of 
+$$
+\frac{\int_{-M}^M \int_0^R |\nabla f(x, r)|^2 r^{d-1} e^{-(d-1) V(x,r)} dx dr}{\int_{-M}^M \int_0^R |f(x, r)|^2 r^{d-1} e^{-(d-1) V_0(x,r)} dx dr}.
+$$
+We can write $r^{d-1} e^{-(d-1) V_0(x,r)}$ as $e^{-(d-1)(V_0(x,r)-\log(r))}$. Therefore, this minimization problem is the Rayleigh quotient with effective potential $V^{eff}_d (x,r) := (d-1)(V_0(x,r)-\log(r))$. In particular, by \Cref{prop:var_char}, $\psi_d(x,y) = \phi_d(x,|y|)$ is the first Neumann eigenfunction of $L_{V^{eff}_d}$. We have reduced the problem to a domain of the form $[-M,M]\times [0,R]$ with a convex potential of the form $V_d(x,y) = (d-1)(V_0(x,y)-\log(y))$ with $\partial_y V_d (x,0) \ge 0$. The bottom $[-M,M]\times \{0\}$ of the rectangle $[-M,M]\times [0,R]$ is not part of the boundary of the original cylindrical set, as $[-M,M]\times \{0\}$ corresponds to the axis of the cylinder, which is in its interior. Therefore, in order to provide a counterexample to the hot spots conjecture on $[-M,M]\times [0,R]$, we do not need to take into account the behavior of the eigenfunction on $[-M,M]\times \{0\}$.
+
+
+\subsection{$L^2$-convergence of the effective problem}
+
+\begin{restatable}[Mass estimates on $V$]{condition}{condmass}\label{cond:mass}
+Inside the box \( B := [-\pi/2,\pi/2] \times [1,3] \) the potential does only depend on $y$, is $10^{-1}$-strongly convex in $y$ and has a minimum at $y=2$. Furthermore, the mass of \( B := [-\pi/2,\pi/2] \times [1,3] \) is at least \( \frac{1}{1+(d/2)^{-1/2}} \) for \( d \ge 10 \), and hence the mass outside this box is at most \( (d/2)^{-1/2} \). 
+\end{restatable}
+
+\Cref{cond:mass} asserts that, in a certain measure-theoretic sense, the problems that define $\phi_d$ converge to the problem associated with the uniform measure on $[-\pi/2,\pi/2]$. One could hope that this measure-theoretic convergence implied convergence of the eigenfunctions. This is true, in an $L^2$ sense: On $[-\pi/2,\pi/2]$, the first eigenfunction is known to be $\sqrt{\frac{2}{\pi}}\sin(x)$. We extend to a function on the entire domain
+\begin{equation*}
+f_0(x,y) :=
+\begin{cases}
+    -\sqrt{\frac{2}{\pi}} & \text{if } x < -\frac{\pi}{2} \\
+    \sqrt{\frac{2}{\pi}}\sin\left(x\right) & \text{if } -\frac{\pi}{2} \le x \le \frac{\pi}{2} \\
+    \sqrt{\frac{2}{\pi}} & \text{if } x > \frac{\pi}{2}
+\end{cases},
+\end{equation*}
+to a function that approximates $\phi_d$ in the following sense:
+
+\begin{proposition}\label{prop:stable_poincare_app}
+There exists a sign $\sigma = \pm 1$ such that $\|f_0 - \sigma\phi_d\|_{L^2(\nu^2)}\le C_{SP}d^{-1/4}$, with $C_{SP}=4$ for $d \ge 1000$.
+\end{proposition}
+
+In order to show \Cref{prop:stable_poincare_app}, we will prove for $d$ large enough ($d \ge \dimension$) the following two facts using the variational inequalities. 
+
+\begin{enumerate}
+    \item The first Laplace eigenvalue converges to $1$, in fact we have $1-\delta_1 \le \lambda_d \le 1+\delta_2$. With $\delta_1 \le 0.05$ for $d \ge 10^6$ and $\delta_2 \le 10^{-14}$ for $d \ge 1000$.
+    \item The second Laplace eigenvalue converges to $4$, in fact for $d\ge 1000$ we have $\lambda_2-\lambda_1 \ge 2$.
+    % \item The first Laplace eigenfunction is antisymmetric. (Proposition XXX). \adrian{Question: We use this in the proof for item 1, but I don't think it is explicitly needed for \Cref{prop:stable_poincare_app}. Therefore, I think stating this fact here is a bit distracting.}\remark{sounds good! Put it where you think it belongs}
+\end{enumerate}
+
+
+The proof that $\lambda_d \le 1+\delta_2$ is by testing the Rayleigh quotient against $f_0$, in fact 
+\begin{equation}\label{eq:f0_almost_minimizer}
+{\|\nabla f_0\|^2_{L^2(e^{-V})}} \le (1+\delta_2) {\|f_0\|^2_{L^2(e^{-V})}} \le (\lambda_d + \delta_1 + \delta_2) {\|f_0\|^2_{L^2(e^{-V})}}
+\end{equation}
+This shows that $f_0$ is an almost-minimizer to the Poincaré inequality with weight $e^{-V}$. Under a spectral gap condition, almost-minimizers to the Poincaré inequality must be close in $L^2$ to the actual minimizer (i.e. the first eigenfunction), this is what is known as stability of the Poincare inequality:
+
+\begin{theorem}[Stability of the Poincare Spectrum]\label{thm:stable_poincare}
+Let \( T \) be a positive-semidefinite, self-adjoint operator on a Hilbert space \( H \) with discrete spectrum, and let \( \{e_i\}_{i=1}^{\infty} \) be a basis of \( H \) consisting of eigenvectors of \( T \), in ascending order of the corresponding eigenvalues \( 0 \le \lambda_1 \le \lambda_2 \le \ldots \). Let \( f \in H \) and assume that there exists \( \varepsilon \geq 0 \) such that $\inner{f}{Tf} \le (\lambda_1 + \varepsilon)\|f\|^2$.
+    If \( \lambda_1 < \lambda_2 \), then
+    \[
+        \|\operatorname{proj}_{\{e_1\}^\perp} f\|^2 \le \frac{\varepsilon}{\lambda_2-\lambda_1} \|f\|^2.
+    \]
+\end{theorem}
+
+This shows that the norm of the projection onto the first eigenfunction is almost one. If $f$ is normalized, then it follows that $f$ must be close to the first eigenfunction in the norm.
+
+\begin{corollary}\label{cor:the_poincare_we_need}
+If $f$ satisfies the hypothesis of \Cref{thm:stable_poincare} (with $\frac{\epsilon}{\lambda_2 - \lambda_1}<1/10$) and is normalized in $L^2$, and $\phi_1$ is the $L^2-$normalized eigenfunction, there exists a sign $\sigma=\pm 1$ such that 
+$$
+\|f-\phi\|_2 \le 1.1 \frac{\varepsilon}{\lambda_2 - \lambda_1}
+$$
+\end{corollary}
+
+The proof of \Cref{prop:stable_poincare_app} follows immediately by applying \Cref{cor:the_poincare_we_need} to \Cref{eq:f0_almost_minimizer}.
+
+
+Moreover, from here one can deduce the following
+
+\begin{proposition}
+    The functions $\phi_d$ are antisymmetric in $x$.
+\end{proposition}
+
+\begin{proof}
+    Since $\lambda_2>\lambda_1$, there is no multiplicity of the first eigenvalue. In particular, the first eigenfunction is symmetric or antisymmetric; see \Cref{prop:eig_symm}.
+
+    If it were symmetric, it would be orthogonal to the antisymmetric function $f_0$, and one would have $\|\phi - f_0\|_2\ge 1$, contradicting \Cref{prop:stable_poincare_app} for $d\ge 1000$.
+\end{proof}
+
+\subsection{$L^\infty$ estimates via ultracontractivity}
+
+Let $P_t$ be the semigroup of $\mathcal{L} = -\Delta + \nabla V \cdot \nabla$. We will discuss the operator $P_t$ in more detail in section \ref{sec:probabilistic}. For now think of $P_t$ in the following way: Let $f \in C^\infty(\Omega)$, then $P_t f$ is a solution to the initial value problem
+\begin{equation}
+    \begin{cases}
+        \partial_t u(x,t) = \mathcal{L} u(x,t) & \text{ for } (x,t)\in \Omega^\circ\times \mathbb R_{>0}, \\
+        \partial_{\vec{n}} u(x,t) = 0 &\text{ for } (x,t)\in \partial \Omega \times \mathbb R_{>0}, \\
+        u(x,0) = f(x) &\text{ for } x \in \Omega.
+    \end{cases}
+\end{equation}
+In particular, for the eigenfunction $\phi_d$ we have $P_t \phi_d = e^{-\lambda_d t} \phi_d$. We will give a probabilistic derivation of this fact in the proof of \Cref{prop:flow_of_eig}.
+
+The Wang-Li-Yau contractivity inequality gives estimates on the $L^\infty$ norm of $P_t f$. In our case, a careful application of the inequality will give us (\Cref{prop:ultracon_app}) that for all $t\ge 1$, one has the estimate
+$$
+\|P_t f\|_{L^\infty} \le C_{LYW} \|f\|_{L^2(\nu_d)}. 
+$$
+
+We will then consider the function $\tilde \phi_d := e^{\lambda_d t}P_t f_0$ for some $t \in [1,1+\tzero/d]$, as a good approximation of $\phi_d$. Indeed, by Wang-Li-Yau we have that
+$$
+\|\tilde \phi_d - \phi_d\|_\infty =
+e^{\lambda_d t}
+\|P_t (f_0 - \phi_d)\|_\infty
+\le C_{LYW}  e^{\lambda_d t}
+\|f_0 - \phi_d\|_{L^2(\nu_d)}
+\le C_{LYW} 
+C_{SP}  e^{\lambda_d t} d^{-1/4}
+$$
+
+In order to control the constant $C_{LYW}$, we will require a second condition on the flow lines by $V_{eff}$, namely that
+
+\begin{restatable}{condition}{condflownorm}
+    \label{cond:coarse_flow}
+    There is a $t_0 = \tzero$ such that the flows $\Phi_t$ by $-\nabla V$ satisfy
+    $\|\Phi_{t_0}(x,y)\|\le \normphizero$ for all $t\ge t_0$.
+\end{restatable}
+
+\begin{proposition}
+    For $d\ge 10^4$ we have $\|\tilde \phi_d - \phi_d\|_\infty \le C_\infty d^{-1/4}$ with $C_\infty = 120$
+\end{proposition}
+
+\subsection{Boundary estimates through probabilistic interpretation}
+
+This section aims to establish that for any boundary point $(x_0, y_0) \in \partial \Omega$ with $y_0 > 0$, the value of $\tilde \phi_d(x_0,y_0)$ is small. To achieve this, we rely on the fact that when $d$ is large, $P_{t/d} f_0(x_0, y_0)$ closely approximates $f_0(\Phi_t(x_0, y_0))$, where $\Phi_t$ denotes the flow generated by $-\nabla V_0$. By the construction of $V$, the value $f_0(\Phi_t(x_0, y_0))$ is small. We have introduced the semigroup \( P_t \) associated with the operator \( \mathcal{L} \) as an operator that describes the time evolution of an initial state $f$ in the system $\partial_t u = \mathcal{L} u$. An alternative representation of \( P_t \) is $P_t f(x) = \mathbb{E}[f(X_t)  X_0 = x]$ where $X_t$ is a diffusion process governed by the stochastic differential equation $\dd{X}_t = -\nabla V(X_t) \dd{t} + \sqrt{2} \dd{B}_t$ with reflecting boundary conditions \cite{chen_lecture_2025}. This equation describes a gradient flow in $V$ with an added Brownian motion. Considering potentials of the form $V_d = (d-1) V_0$, for large $d$, the deterministic term $-\nabla V_d(X_t)$, which scales with $d$, dominates the constant Brownian motion term $\sqrt{2}\dd{B}_t$. To make this intuition precise, let $P_{d,t}$ be the semigroup associated to the operator $\mathcal{L}_d = -\Delta + \nabla V_d \cdot \nabla$. By changing variables $\tau = t/(d-1)$, the process $\dd{X}_t = -\nabla V_d(X_t) \dd{t} + \sqrt{2} \dd{B}_t$ transforms into $\dd{X}_\tau = -\nabla V_0(X_\tau) \dd{\tau} + \frac{1}{d-1}\sqrt{2} \dd{B}_\tau$. For large $d$, this approximates the ordinary differential equation $\dd{\Phi}_\tau = -\nabla V_0(\Phi_\tau) \dd{\tau}$, representing the flow by $-\nabla V_0$. In fact, by \Cref{prop:approx_by_flow}, we have that
+\begin{equation*}
+    P_{d, t/(d-1)} f (x) \le f(\Phi_t(x)) + C 2\sqrt{t/d},
+\end{equation*}
+for any $C$-Lipschitz function $f$. In our case, $f_0$ is $\sqrt{\frac{2}{\pi}}$-Lipschitz. \Cref{thm:prop_of_semigroup} will show that the application of $P_t$ preserves the Lipschitz property, therefore $\tilde \phi_d = e^{\lambda_d t} P_t f_0$ is $\sqrt{\frac{2}{\pi}}e^{\lambda_d t}$-Lipschitz. Recall that, in order to control the Wang-Li-Yau constant $C_{WLY}$, the time $t$ cannot be arbitrarily small. Therefore, we split the flow time into $1+t_0/d$. By the semigroup property, we have $\tilde \phi_d = e^{\lambda_d (1+t_0/d)}P_{t_0/d}P_1 f_0$. Applying \Cref{prop:approx_by_flow} to $P_1 f_0$, we obtain
+\begin{equation*}
+    \tilde \phi_d (x, y) \le e^{\lambda_d (1+t_0/d)} \left(P_1 f_0(\Phi_{t_0}(x, y)) + 4\sqrt{\frac{t_0}{d}}\right).
+\end{equation*}
+
+The function $P_{1} f_0(x_t,y_t)$ is $\sqrt{\frac{2}{\pi}}$-Lipschitz and antisymmetric. In particular $|P_{1} f_0(x_t,y_t)|\le \sqrt{\frac{2}{\pi}}|\Phi_t(x,y)_x|$, implying that for any $(x,y) \in \partial_{eff} R$
+\begin{equation}\label{eq:boundary_estimate}
+    \tilde \phi_d (x, y) \le e^{\lambda_d (1+t_0/d)} \left(\sqrt{\frac{2}{\pi}}|\Phi_t(x,y)_x| + 4\sqrt{\frac{t_0}{d}}\right).
+\end{equation}
+
+To conclude, we need the following condition on the potential $V_0-\log(r)$:
+
+\begin{restatable}{condition}{condflowx}
+\label{cond:flow}
+    For any $(x,y) \in \partial_{eff} R$ and any $t\ge t_0$, we have $|\Phi_t(x,y)_x|\le 0.35$. 
+\end{restatable}
+
+The conclusion of this argument is the following proposition.
+
+\begin{proposition} \label{prop:small_on_boundary}
+There exist constants $C_{1,\partial} \le 0.7$  and $C_{2,\partial} \le 80$ such that for $d\ge 10^4$ we have $\max_{x \in \partial_{eff}} |\tilde \phi (x)| \le C_{1,\partial} + C_{2,\partial}/\sqrt{d}$
+\end{proposition}
+\begin{proof}
+    Set $C_{1,\partial} = e^{1+t_0/d}\sqrt{\frac{2}{\pi}} 0.35 \ge e^{1+t_0/d}\sqrt{\frac{2}{\pi}} |\Phi_t(x,y)_x|$ and $C_{2,\partial} = 4\sqrt{t_0}e^{1+t_0/d}$ for $t_0 = 50$ and $d=10000$.
+\end{proof}
+
+
+\subsection{Joining it all together}
+
+We are now in a position to assemble the estimates from the preceding sections to prove our main result. First, the $L^2$-normalization of the eigenfunctions $\phi_d$ ensures that $\phi$ is at least one somewhere in the domain. Second, we have constructed a tractable approximation $\tilde\phi_d$ of the eigenfunction and shown that its maximum value on the effective boundary is small. Specifically, \Cref{prop:small_on_boundary} gives the bound:
+$$
+\max_{x \in \partial_{eff} S} |\tilde{\phi}(x)| < (C_{1,\partial} + C_{2,\partial}d^{-1/2})
+$$
+Third, using ultracontractivity of $P_t$ we have we established that $\tilde\phi_d$ is a good approximation of $\phi_d$ in the $L^\infty$ norm, with the error decaying in the dimension:
+$$
+\|\tilde\phi_d - \phi_d\|_{L^\infty(\mu_d)} < C_\infty d^{-1/4}
+$$
+Using these three ingredients, we can now show that for sufficiently large $d$, the maximum of $\phi_d$ is attained in the interior of the domain, away from the effective boundary, or equivalently, that
+$$
+\max_{x \in S} |\phi(x)| - \max_{x \in \partial_{eff} S}  |\phi(x)| > 0.
+$$
+Indeed, for $d > \left(\frac{C\infty+ C_{2,\partial}}{1 - C_{1,\partial}}\right)^4$ we have
+$$
+\max_{x \in S} |\phi(x)| - \max_{x \in \partial_{eff} S}  |\phi(x)| 
+\ge 1 - (C_{1,\partial} + C_{2,\partial}d^{-1/2}) - C_\infty d^{-1/4} > 0.
+$$
+Therefore, for $d$ sufficiently large ($d > \dimension$), the global maximum (and, by antisymmetry, the minimum) of the first Neumann eigenfunction is attained in the interior, away from the effective boundary, completing the argument.
+
+
+\newpage

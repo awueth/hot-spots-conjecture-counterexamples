@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage[a4paper, margin=2.8cm]{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{physics}
+\usepackage{hyperref}
+\usepackage{bbm}
+\usepackage{cleveref}
+\usepackage{thmtools}
+\usepackage{pdfpages}
+\usepackage{todonotes}
+
+\newcommand{\add}[1]
+{\todo[inline,color=green,caption={}]{#1}}
+\newcommand{\remark}[1]{\todo[inline,color=orange,caption={}]{#1}}
+\newcommand{\adrian}[1]{\todo[inline,color=red,caption={}]{#1}}
+\newcommand{\XX}{{\color{red}{XXX}}}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{condition}{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\title{Low dimensional counterexamples to the weighted hot spots conjecture}
+\author{Adrian Wüthrich}
+\date{May 2025}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\inner}[2]{\langle #1, #2 \rangle}
+
+%%% =================== NUMERICAL VALUES ===================
+
+\newcommand{\dimension}{10^{12}}
+\newcommand{\eiglowerdelta}{0.03}
+\newcommand{\tzero}{50}
+\newcommand{\normphizero}{2.5}
+
+%%% ========================================================
+
+
+\maketitle
+
+\begin{abstract}
+    Recently \cite{pont_convex_2024} found counterexamples to the Hot Spots conjecture in sufficiently high dimensions. While the dimension at which the conjecture starts to be false is in principle effective, the number arising from a direct interpretation of the proof is excessively large.  This work initiates a program towards finding low-dimensional counterexamples to the Hot Spots conjecture, by focusing on a related 'weighted' version of the conjecture, which served as a key surrogate problem in the original disproof. By constructing a specific family of convex domains and potentials, we establish an effective lower bound, showing that for dimensions $d \ge \dimension$, counterexamples to the weighted Hot Spots conjecture exist.
+\end{abstract}
+
+
+\input{sections/introduction}
+
+\input{sections/probabilistic}
+
+\input{sections/poincare}
+
+\input{sections/symmetry.tex}
+
+\input{sections/potential}
+
+
+
+\bibliographystyle{alpha}
+\bibliography{references}
+\newpage 
+
+\appendix
+
+%Here is old stuff I didn't know where to put
+
+%\input{sections/meat}
+
+
+\includepdf[pages=-]{declaration}
+
+
+\end{document}

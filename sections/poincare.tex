@@ -1,0 +1,170 @@
+
+\section{The $L^2$ convergence of eigenvalues and eigenfunctions}
+
+
+
+
+By \Cref{cond:mass}, the mass of the measures $\nu_d$ converges to the uniform measure on the segment $[-\pi/2,\pi/2]\times\{2\}$, one would expect the spectra (eigenfunctions, eigenvalues) of the Laplace operator on $\nu_d$ to converge to that on the segment. This section shows that, at least for the lowest eigenvalues, this is the case (that is, \Cref{prop:stable_poincare_app}) The main ingredient to prove \Cref{prop:stable_poincare_app} is the Stable version of the Poincaré inequality (\Cref{thm:stable_poincare}). We provide a proof of \Cref{thm:stable_poincare} for completeness.
+
+\begin{proof}[Proof of \Cref{thm:stable_poincare}]
+    Note that \( \inner{f}{Tf} = \sum_{i=1}^\infty \lambda_i |\inner{e_i}{f}|^2 \) and \( \|f\|^2 = \sum_{i=1}^\infty |\inner{e_i}{f}|^2 \). By assumption we have
+    \begin{equation*}
+        \varepsilon \|f\|^2 
+        \geq \inner{f}{Tf} - \lambda_1 \|f\|^2
+        = \sum_{i=1}^\infty (\lambda_i - \lambda_1) |\inner{e_i}{f}|^2
+        \geq (\lambda_2-\lambda_1) \sum_{i=2}^\infty  |\inner{e_i}{f}|^2,
+    \end{equation*}
+    where in the last step we used that \( \inner{f}{e_0}=0 \) and that $\lambda_1 < \lambda_2 \le \dots$. Since we assumed that we have a spectral gap we can divide by $\lambda_2 - \lambda_1$, yielding
+    \[
+        \frac{\varepsilon}{\lambda_2 - \lambda_1} \|f\|^2 
+        \geq  \sum_{i=2}^\infty  |\inner{e_i}{f}|^2
+        = \|\operatorname{proj}_{\{e_1\}^\perp} f\|^2.
+    \]
+\end{proof}
+
+\begin{proof}[Proof of \Cref{cor:the_poincare_we_need}]
+We decompose \( f = f_{\parallel} + f_{\perp} \) into components \( f_{\parallel} \in \operatorname{span}\{\phi^{(1)}_{V_d}\} \) and \( f_\perp \in (\operatorname{span}\{\phi^{(1)}_{V_d}\})^\perp \). 
+By stable Poincaré we have $\|f_\parallel\|^2 = 1 - \|f_\perp\|^2 \ge 1 - \frac{\varepsilon}{\lambda_2 - \lambda_1}$. 
+Therefore $\|f_\parallel - \phi\| = 1-\|f_\parallel\| \le 1-\sqrt{1-\frac{\varepsilon}{\lambda_2 - \lambda_1}}$
+Now by stable Poincaré
+$$
+\|f_0 - \varphi^{(1)}_{V_d}\|^2 
+= \|f_\parallel - \varphi^{(1)}_{V_d}\|^2 + \|f_\perp\|^2
+\le (1-\sqrt{1-\frac{\varepsilon}{\lambda_2 - \lambda_1}})^2 + \frac{\varepsilon}{\lambda_2 - \lambda_1}
+\le 2 \frac{\varepsilon}{\lambda_2 - \lambda_1}
+$$
+we conclude that $\|f_0 - \varphi^{(1)}_{V_d}\| \le \sqrt{\varepsilon}$
+\end{proof}
+
+\Cref{cor:the_poincare_we_need} reduces \Cref{prop:stable_poincare_app} to showing that $f_0$ is an almost-extremizer to the Poincaré inequality, and that there is a spectral gap. 
+
+This will follow from the two following three propositions 
+
+\begin{proposition} \label{prop:eig_upper_bound}
+For \( d \ge 400 \) and \( \delta_2 \ge 10^{-14} \) we have 
+$$
+\lambda^{1}_{V_d} \le 1+\delta_2
+$$
+\end{proposition}
+
+\begin{proposition} \label{prop:eig_lower_bound}
+For $\delta_1 = d^{-1/2} C_t e^t$, we have
+    \begin{equation*}
+        (1-\delta_1) \le \lambda^{1}_{V_d}
+    \end{equation*}
+\end{proposition}
+
+\begin{proposition} \label{prop:gap_bound}
+$4(1-\delta_1) \le \lambda^{2}_{V_d}$ in particular $\lambda_2 - \lambda_1 > 2$
+\end{proposition}
+
+The proof of the upper bound is straightforward, as evaluating the Rayleigh quotient at any mean zero function provides a bound by the variational characterization. If the spectrum of  $L$ is to converge to the spectrum of the one-dimensional Laplacian on the segment, testing the Rayleigh quotient against
+\begin{equation*}
+f_0(x,y) :=
+\begin{cases}
+    -\sqrt{\frac{2}{\pi}} & \text{if } x < -\frac{\pi}{2} \\
+    \sqrt{\frac{2}{\pi}}\sin\left(x\right) & \text{if } -\frac{\pi}{2} \le x \le \frac{\pi}{2} \\
+    \sqrt{\frac{2}{\pi}} & \text{if } x > \frac{\pi}{2}
+\end{cases},
+\end{equation*}
+should provide a good upper bound. Indeed:
+\begin{proof}[Proof of upper bound]
+    The first eigenvalue \( \lambda^{(1)}_{V_d} \) is characterized as the infimum of the Rayleigh quotient. As such it can be upper bounded by testing the Rayleigh quotient against the antisymmetric function \( f_0 \).
+    We obtain
+    \begin{equation*}
+        \lambda^{(1)}_{V_d} 
+        = \inf_{f \perp 1} \frac{\int_S |\nabla f|^2 \dd{\mu_d}}{\int_S |f|^2 \dd{\mu_d}}
+        \le \frac{\int_{[-\pi/2,\pi/2] \times[0,10]} |\cos(x)|^2 \dd{\mu_d}}{\int_{[-\pi/2,\pi/2] \times[0,3]} |\sin(x)|^2 \dd{\mu_d}},
+    \end{equation*}
+    since the gradient vanishes for \( |x| > \pi/2 \). By \Cref{cond:Vy_on_box}, the potential equals \( V(x,y) = y/2 - \log y \)  on \( [-\pi/2,\pi/2] \times [0,3] \). Therefore, the denominator in the equation simplifies to 
+    \begin{equation*}
+        \int_{-\pi/2}^{\pi/2} \sin(x)^2 \dd{x} \cdot \int_0^3 e^{-V_d(x,y)} \dd{y}
+        = \frac{\pi}{2} \int_0^3 e^{-(d-1)(y/2 - \log y)} \dd{y}.
+    \end{equation*}
+    For the numerator almost the same argument applies since \( V(x,y) \ge y/2 - \log y \) for any \( (x,y) \in [-\pi/2,\pi/2] \times [0,10] \), therefore 
+    \begin{equation*}
+        \int_{[-\pi/2,\pi/2] \times[0,10]} |\cos(x)|^2 \dd{\mu_d} \le \frac{\pi}{2}\int_0^{10} e^{-(d-1)(y/2-\log y)} \dd{y}.
+    \end{equation*}
+    Putting everything together
+    \begin{equation*}
+        \lambda^{(1)}_{V_d} 
+        \le \frac{\int_0^{10} y^{d-1}e^{-(d-1) y/2}}{\int_0^{3} y^{d-1}e^{-(d-1) y/2}}
+        = \frac{\gamma(d,5(d-1))}{\gamma(d,\frac{3}{2}(d-1))}
+        \to 1.
+    \end{equation*}
+    The sequence \( \{ \gamma(d,5(d-1)) / \gamma(d,\frac{3}{2}(d-1)) \}_d \) is decreasing in \( d \) and using arb we obtain \( \frac{\gamma(400,5(400-1))}{\gamma(400,\frac{3}{2}(400-1))} = 1 \pm 2.61 \cdot 10^{-15} \le 1 + 10^{-14} \).
+\end{proof}
+
+
+The proofs of the lower bounds are a bit more elaborate. We begin showing that the lower eigenvalues of the one-dimensional Laplacian on $[-\pi/2, \pi/2]$ coincide with the lower eigenvalues of $L$ restricted to $B$. Then it will suffice to show that the eigenvalues of $L$ in the entire space are lower bounded by the $B$-eigenvalues. 
+
+\begin{lemma}\label{lem:spectrum_decomposition}
+Let $\sigma(B)$ be the spectrum of $L$ with respect to the measure weighted by $\mathbbm{1}_B e^{-V}$
+\begin{equation*}
+    \sigma(B) = \sigma([-1,1]) + \sigma(\nu)
+\end{equation*}
+    in particular \( \lambda_B^{(1)} = 1 \) and \( \lambda_B^{(2)} = 4 \)
+\end{lemma}
+\begin{proof}[Proof of \Cref{lem:spectrum_decomposition}]
+    For \( (x,y) \in  B \) we have \( \mu(x,y) = \mathbbm{1}(x) \times \nu(y) \) hence \( L^2(\mu) = L^2(\mathbbm{1} \times \nu) \) which is isomorphic to \( L^2([-1,1], \mathbbm{1}) \otimes L^2([1,3], \nu) \). The spectrum of \( \mathcal L \) on \( L^2(B, \mu) \) is equal to the spectrum of \( \mathcal L_{\otimes} := \mathcal L_x \otimes 1 + 1 \otimes \mathcal L_y \) on \( L^2([-1,1], \mathbbm{1}) \otimes L^2([1,3], \nu) \). Let \( \varphi \otimes \psi \) be an eigenvector of \( \mathcal L_\otimes \) to the eigenvalue \( \lambda \), we have
+    \begin{equation*}
+        \varphi \otimes \lambda \psi = \lambda(\varphi \otimes \psi) = \mathcal L_\otimes (\varphi \otimes \psi) = \mathcal{L}_x \varphi \otimes \psi + \varphi \otimes \mathcal L_y \psi
+    \end{equation*}
+    which is equivalent to \( \varphi \otimes (\lambda \psi - \mathcal L_y \psi) = \mathcal L_x\varphi \otimes \psi \). Hence, there is a constant \( \lambda_x \ne 0 \) such that \( \mathcal L_x \varphi = \lambda_x \varphi \) and \( \mathcal L_y \psi = (\lambda - \lambda_x)\psi \). We have shown that \( \lambda_x \) and \( \lambda_y := \lambda - \lambda_x \) are eigenvalues of \( \mathcal L_x \) and \( \mathcal L_y \) respectively, and that \( \lambda = \lambda_x + \lambda_y \). \\
+    Conversely, if \( \lambda_x, \varphi \) and \( \lambda_y, \psi \) are eigenvalue-eigenvector pairs to \( \mathcal L_x \) and \( \mathcal L_y \) respectively, then \( \varphi \otimes \psi \) is an eigenvector of \( \mathcal L_{\otimes} \) with eigenvalue \( \lambda_x + \lambda_y \), indeed
+    \begin{equation*}
+        \mathcal L_\otimes (\varphi \otimes \psi) = \mathcal{L}_x \varphi \otimes \psi + \varphi \otimes \mathcal L_y \psi = \lambda_x \varphi \otimes \psi + \varphi \otimes \lambda_y \psi = (\lambda_x + \lambda_y) (\varphi \otimes \psi).
+    \end{equation*}
+    We conclude that \( \sigma(B) = \sigma([-1,1]) + \sigma(\nu) \). If we show that \( \lambda^{(1)}_\nu \ge \frac{\pi^2}{4} = \lambda_{[-1,1]} \), then it follows immediately that \( \lambda_{[-1,1]}^{(1)} = \lambda_B^{(1)} \). Observe that \( \dv[2]{}{y} (d-1)(y/2 - \log y) = (d-1)/y^2 \ge (d-1)/9 \) for any \( y \in [1,3] \), hence by lemma~\ref{lem:Bakry-Emery-Poincare} we have \( \lambda^{(1)}_\nu \ge (d-1)/9 \). For \( d \ge 23 \) this implies \( \lambda^{(1)}_\nu \ge \frac{\pi^2}{4} \).
+\end{proof}
+
+For the proofs of the lower bounds we will need
+
+\begin{lemma} \label{lem:ultracontractivity_trick}
+    For any eigenfunction \( f \) of \( \mathcal L \), we have \( \|f\|_{L^2(B,\mu_d)}^2 \ge (1-\frac{1}{\sqrt{d}}C_t e^{\lambda t})\|f\|_{L^2(S,\mu_d)}^2 \).
+\end{lemma}
+\begin{proof}
+    Observe that \( \|f\|_{L^2(B,\mu_d)}^2 = \|f\|_{L^2(S,\mu_d)}^2 - \|f\|_{L^2(S \setminus B,\mu_d)}^2 \). The latter term can be controlled by the measure of the set \( S \setminus B \), that is \( \|f\|_{L^2(S \setminus B, \mu_d)}^2 \le \mu_d(S \setminus B) \|f\|^2_{L^\infty(S,\mu_d)} \). Using ultracontractivity (\Cref{thm:ultracon}) we can upgrade this \( L^\infty \) estimate to an \( L^2 \) estimate,
+    \begin{equation*}
+        \mu_d(S \setminus B) \|f\|^2_{L^\infty(S,\mu_d)}
+        \le \mu_d(S \setminus B) C_t e^{\lambda t} \|f\|^2_{L^2(S,\mu_d)}
+    \end{equation*}
+    Therefore, \( \|f\|_{L^2(B,\mu_d)}^2 \ge \|f\|_{L^2(S,\mu_d)}^2 - C_t e^{\lambda t}\|f\|_{L^2(S,\mu_d)}^2 = (1-C_t e^{\lambda t})\|f\|_{L^2(S,\mu_d)}^2 \).
+\end{proof}
+
+\begin{proof}[Proof of lower bound]
+    We have to show that \( (1-\delta_1)\lambda^{(1)}_{[-1,1]} \le \lambda^{(1)}_{V_d} \).
+    According to lemma~\ref{lem:spectrum_decomposition} this is equivalent to showing that \( (1-\delta_1)\lambda^{(1)}_{B} \le \lambda^{(1)}_{V_d} \).
+    Let \( \varphi_{V_d}^{(1)} \) be the first eigenfunction of \( V_d \), since it is antisymmetric, its restriction to \( B \) is orthogonal to the constant function on \( B \).
+    Therefore, we can use the Rayleigh quotient characterization of \( \lambda^{(1)}_{B} \) to obtain
+    \begin{equation*}
+        \lambda^{(1)}_{B}
+        \le \frac{\int_{B} |\nabla\varphi_{V_d}^{(1)}|^2 \dd{\mu_d}}{\int_{B} |\varphi_{V_d}^{(1)}|^2 \dd{\mu_d}}
+        \le \frac{\int_{S} |\nabla\varphi_{V_d}^{(1)}|^2 \dd{\mu_d}}{\int_{B} |\varphi_{V_d}^{(1)}|^2 \dd{\mu_d}}.
+    \end{equation*}
+    Applying lemma~\ref{lem:ultracontractivity_trick} to the denominator on the right-hand side gives us the desired result
+    \begin{equation*}
+        \lambda^{(1)}_{B} \le (1-\delta_1)^{-1} \frac{\int_{S} |\nabla\varphi_{V_d}^{(1)}|^2 \dd{\mu_d}}{\int_{S} |\varphi_{V_d}^{(1)}|^2 \dd{\mu_d}} = (1-\delta_1)^{-1}\lambda^{(1)}_{V_d}.
+    \end{equation*}
+\end{proof}
+
+
+\begin{proof}[Proof of \Cref{prop:gap_bound}]
+    According to lemma~\ref{lem:spectrum_decomposition} this is equivalent to showing that \( (1-\delta_1) \lambda^{(2)}_{B} \le \lambda^{(2)}_{V_d} \). This time we cannot write \( \lambda^{(2)}_{B} \) as the infimum of a Rayleigh quotient, instead we use that
+    \begin{equation*}
+        \lambda_B^{(2)} 
+        = \min_{F \subseteq L^2(B), \dim F = 2}\max_{f \in F} \frac{\inner{f}{\mathcal{L}_B f}}{\|f\|_{L^2(B)}^2}.
+    \end{equation*}
+    By choosing \( F = \operatorname{span}\{\varphi^{(1)}_{V_d}, \varphi^{(2)}_{V_d}\} \) we obtain the upper bound
+    \begin{equation*}
+        \lambda_B^{(2)}
+        \le \max_{f \in \operatorname{span}\{\varphi^{(1)}_{V_d}, \varphi^{(2)}_{V_d}\}} \frac{\inner{f}{\mathcal{L}_{B} f}}{\|f\|_{L^2(B)}^2}
+        = \max_{\alpha, \beta} \frac{\inner{\alpha \varphi^{(1)}_{V_d} + \beta \varphi^{(2)}_{V_d} }{\mathcal{L}_{B} (\alpha \varphi^{(1)}_{V_d} + \beta \varphi^{(2)}_{V_d})}}{\|\alpha \varphi^{(1)}_{V_d}\|_{L^2(B)}^2 + \|\beta \varphi^{(2)}_{V_d}\|_{L^2(B)}^2},
+    \end{equation*}
+    where we used orthogonality on \( B \) which we have since \( \varphi^{(1)}_{V_d} \) is antisymmetric and \( \varphi^{(2)}_{V_d} \) is symmetric. 
+    As in the proof for the lower bound of \( \lambda^{(1)}_{V_d} \) we can use lemma~\ref{lem:ultracontractivity_trick} to go from \( B \) to \( S \), that is
+    \begin{equation*}
+        \lambda_B^{(2)}
+        \le (1-\delta_1)^{-1} \max_{f \in \operatorname{span}\{\varphi^{(1)}_{V_d}, \varphi^{(2)}_{V_d}\}} \frac{\inner{f}{\mathcal{L}_{S} f}}{\|f\|_{L^2(S)}^2} = (1-\mu(S \setminus B)C_t e^{\lambda^{(2)} t})^{-1} \lambda^{(2)}_{V_d}.
+    \end{equation*}
+\end{proof}

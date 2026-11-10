@@ -1,0 +1,24 @@
+\section{Symmetry Considerations}
+
+\begin{proposition}\label{prop:eig_symm}
+    Let $V(x,y) : \Omega \to \R$ be a potential such that $V(-x,y) = V(x,y)$ for all $(x,y) \in \Omega$. Then, any Eigenfunction $\phi$ of $L = -\Delta + \nabla V \cdot \nabla$ are is symmetric or antisymmetric in $y$, i.e. $\phi(-x,y) = \pm \phi(x,y)$.
+\end{proposition}
+\begin{proof}
+    The operator changing $x$ to $-x$ commutes with $L$.
+\end{proof}
+
+\propradial*
+\begin{proof}
+    Assume for contradiction that $\phi_d$ is not radial. Define $\overline \phi(x,r) := \frac{1}{|r\mathbb{S}^{d-1}|}\int \phi_d(x,r \vec{e}) \dd{\vec{e}}$, then the function $\tilde \phi(x,w) := \phi_d(x,w) - \overline \phi(x,|w|)$ is a nonzero eigenfunction to the same eigenvalue. By Poincaré's inequality, we have
+    $$
+    \int_{r \mathbb{S}^{d-1}} |\tilde\phi_d|^2 \dd{S} 
+    \le C(10 \mathbb{S}^{d-1}) \int_{r \mathbb{S}^{d-1}} |\nabla_S \tilde\phi_d|^2 \dd{S} 
+    \le \frac{100}{d-1}\int_{r \mathbb{S}^{d-1}} |\nabla \tilde\phi_d|^2 \dd{S},
+    $$
+    for any $r\le 10$. Integrating over the radius and $M$ yields
+    $$
+    \int_{\Omega_d} |\phi_d|^2 \dd{x} 
+    \le \frac{100}{d-1}\int_\Omega |\nabla \phi_d|^2 \dd{x},
+    $$
+    and thus $\lambda_{\Omega_d, V_d} \ge \frac{d-1}{100}$, contradicting the assumption that $\lambda^{1}_{\Omega,V}<\frac{d}{100}$.
+\end{proof}

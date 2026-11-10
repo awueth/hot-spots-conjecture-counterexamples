@@ -1,0 +1,19 @@
+\section{Spectrum of the one-dimensional Neumann Laplacian}
+
+In this section, we describe the spectrum of the Neumann Laplacian on $[-L, +L]$. A function $f \in C^?([-L, +L])$ is a Neumann eigenfunction, if it satisfies the boundary value problem
+\[
+  \partial_x^2 f = \lambda f, \quad \partial_x f(\pm L) = 0,
+\]
+for some $\lambda \in \R$ (Laplacian is self-adjoint).
+
+Let $f$ be such a function, due to the Neumann boundary condition, $f$ can be extended to a \( 4L \)-periodic function in \( C^?(\R) \). As such, we can write $f$ as a Fourier series.
+
+\[
+  f(x) = a_0/2 + \sum_{k=1}^\infty a_k \cos(\pi k x / L) + b_k \sin(\pi k x / L).
+\]
+
+Due to the boundary condition $\partial_x f(L) = 0$ we have $a_k = 0$ for all odd $k$ and $b_k = 0$ for all even $k$. Let us assume for now that $k$ is odd, then the condition \( \partial_x^2 f = \lambda f \) gives us
+\[
+  \forall x \in (-L, L) : \sum_{k=1}^\infty - (\frac{k\pi}{L})^2 b_k \sin(\frac{k\pi}{L} x) =  \sum_{k=1}^\infty \lambda b_k \sin(\frac{k\pi}{L} x),
+\]
+from which it immediately follows that $(\lambda - (\frac{k\pi}{L})^2)b_k = 0$ for all odd $k$. This shows that for odd $k$ we have the eigenvalues $\lambda_k = (\frac{k\pi}{L})^2$ and the corresponding eigenfunctions $f_k (x) = \sin(k x)$. Similarly, we can show that for even $k$ we have the eigenvalues $\lambda_k = (\frac{k\pi}{L})^2$ and the corresponding eigenfunctions \( f_k (x) = \cos(\frac{k\pi}{L} x) \).
